@@ -1,0 +1,34 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1719836792132,
+      "tag": "0000_bouncy_inhumans",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1719899654863,
+      "tag": "0001_flaky_may_parker",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1719922475937,
+      "tag": "0002_classy_lucky_pierre",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1719928061887,
+      "tag": "0003_aromatic_white_tiger",
+      "breakpoints": true
+    }
+  ]
+}
