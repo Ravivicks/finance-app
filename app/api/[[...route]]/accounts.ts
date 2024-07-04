@@ -19,16 +19,16 @@ const app = new Hono()
     clerkMiddleware(),
     async (c) => {
       const auth = getAuth(c);
-      // if (!auth?.userId) {
-      //   return c.json({ error: "unauthorized" }, );
-      // }
+      if (!auth?.userId) {
+        return c.json({ error: "unauthorized" }, 200);
+      }
       const data = await db
         .select({
           id: accounts.id,
           name: accounts.name,
         })
-        .from(accounts);
-      // .where(eq(accounts.userId, auth.userId));
+        .from(accounts)
+        .where(eq(accounts.userId, auth.userId));
       return c.json({ data });
     }
   )
