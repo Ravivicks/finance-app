@@ -22,7 +22,7 @@ const Actions = ({ id }: Props) => {
   const deleteMutation = useDeleteAccount(id);
   const [ConfirmationDialog, confirm] = useConfirm(
     "Are you sure?",
-    "You are about to delete this transaction."
+    "You are about to delete this account."
   );
 
   const handleDelete = async () => {

@@ -8,7 +8,7 @@ const ProfileButton = () => {
   return (
     <div className="flex items-center gap-2">
       <UserButton afterSignOutUrl="/" />
-      <p className="text-lg text-white capitalize">
+      <p className="text-base text-white capitalize">
         {user?.firstName} {user?.lastName}
       </p>
     </div>
