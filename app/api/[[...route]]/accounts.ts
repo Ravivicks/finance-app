@@ -10,6 +10,7 @@ import { z } from "zod";
 const app = new Hono()
   .get("/", clerkMiddleware(), async (c) => {
     const auth = getAuth(c);
+    console.log("Auth object:", auth); // Log the auth object
     if (!auth?.userId) {
       return c.json({ error: "unauthorized" }, 401);
     }
