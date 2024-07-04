@@ -20,7 +20,7 @@ const app = new Hono()
     async (c) => {
       const auth = getAuth(c);
       if (!auth?.userId) {
-        return c.json({ error: "unauthorized" }, 200);
+        return c.json({ error: "unauthorized" }, 400);
       }
       const data = await db
         .select({
