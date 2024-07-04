@@ -6,40 +6,24 @@ import { and, eq, inArray } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
-import { cors } from "hono/cors";
 
 const app = new Hono()
-  .get(
-    "/",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
-    clerkMiddleware(),
-    async (c) => {
-      const auth = getAuth(c);
-      console.log("Auth object:", auth); // Log the auth object
-      if (!auth?.userId) {
-        return c.json({ error: "unauthorized" }, 401);
-      }
-      const data = await db
-        .select({
-          id: accounts.id,
-          name: accounts.name,
-        })
-        .from(accounts)
-        .where(eq(accounts.userId, auth.userId));
-      return c.json({ data });
-    }
-  )
+  .get("/", clerkMiddleware(), async (c) => {
+    const auth = getAuth(c);
+    // if (!auth?.userId) {
+    //   return c.json({ error: "unauthorized" }, );
+    // }
+    const data = await db
+      .select({
+        id: accounts.id,
+        name: accounts.name,
+      })
+      .from(accounts);
+    // .where(eq(accounts.userId, auth.userId));
+    return c.json({ data });
+  })
   .get(
     "/:id",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
     clerkMiddleware(),
     zValidator(
       "param",
@@ -73,11 +57,6 @@ const app = new Hono()
   )
   .post(
     "/",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
     clerkMiddleware(),
     zValidator("json", insertAccountSchema.pick({ name: true })),
     async (c) => {
@@ -102,11 +81,6 @@ const app = new Hono()
   )
   .post(
     "/bulk-delete",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
     clerkMiddleware(),
     zValidator(
       "json",
@@ -136,11 +110,6 @@ const app = new Hono()
   )
   .patch(
     "/:id",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
     clerkMiddleware(),
     zValidator(
       "param",
@@ -182,11 +151,6 @@ const app = new Hono()
   )
   .delete(
     "/:id",
-    cors({
-      origin: "*",
-      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowHeaders: ["Content-Type", "Authorization"],
-    }),
     clerkMiddleware(),
     zValidator(
       "param",
