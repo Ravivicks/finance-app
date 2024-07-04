@@ -12,7 +12,7 @@ const app = new Hono()
   .get(
     "/",
     cors({
-      origin: "https://finance-5ak6tpnkw-ravivicks-projects.vercel.app",
+      origin: "*",
       allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowHeaders: ["Content-Type", "Authorization"],
     }),
@@ -35,6 +35,11 @@ const app = new Hono()
   )
   .get(
     "/:id",
+    cors({
+      origin: "*",
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+    }),
     clerkMiddleware(),
     zValidator(
       "param",
@@ -68,6 +73,11 @@ const app = new Hono()
   )
   .post(
     "/",
+    cors({
+      origin: "*",
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+    }),
     clerkMiddleware(),
     zValidator("json", insertAccountSchema.pick({ name: true })),
     async (c) => {
@@ -92,6 +102,11 @@ const app = new Hono()
   )
   .post(
     "/bulk-delete",
+    cors({
+      origin: "*",
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+    }),
     clerkMiddleware(),
     zValidator(
       "json",
@@ -121,6 +136,11 @@ const app = new Hono()
   )
   .patch(
     "/:id",
+    cors({
+      origin: "*",
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+    }),
     clerkMiddleware(),
     zValidator(
       "param",
@@ -162,6 +182,11 @@ const app = new Hono()
   )
   .delete(
     "/:id",
+    cors({
+      origin: "*",
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["Content-Type", "Authorization"],
+    }),
     clerkMiddleware(),
     zValidator(
       "param",
