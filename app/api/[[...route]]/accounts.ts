@@ -1,12 +1,13 @@
 import { Hono } from "hono";
 import { db } from "@/db/drizzle";
-import { accounts, insertAccountSchema } from "@/db/schema";
+import { accounts, customers, insertAccountSchema } from "@/db/schema";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { and, eq, inArray } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { createId } from "@paralleldrive/cuid2";
 import { z } from "zod";
 import { cors } from "hono/cors";
+import { lemonSqueezyApiInstance } from "@/lib/utils";
 
 const app = new Hono()
   .get(
@@ -22,6 +23,7 @@ const app = new Hono()
       if (!auth?.userId) {
         return c.json({ error: auth }, 400);
       }
+
       const data = await db
         .select({
           id: accounts.id,

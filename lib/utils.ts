@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import { twMerge } from "tailwind-merge";
+import axios from "axios";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -98,3 +99,12 @@ export function formatPercentage(
   }
   return result;
 }
+
+export const lemonSqueezyApiInstance = axios.create({
+  baseURL: process.env.LEMON_SQUEEZY_ENDPOINT,
+  headers: {
+    Accept: "application/vnd.api+json",
+    "Content-Type": "application/vnd.api+json",
+    Authorization: `Bearer ${process.env.LEMON_SQUEEZY_API_KEY}`,
+  },
+});

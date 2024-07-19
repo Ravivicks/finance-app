@@ -1,0 +1,1 @@
+ALTER TABLE "customers" ADD COLUMN "subscription_id" integer NOT NULL;

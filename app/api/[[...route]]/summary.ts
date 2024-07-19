@@ -1,8 +1,19 @@
 import { db } from "@/db/drizzle";
-import { accounts, categories, transactions } from "@/db/schema";
-import { calculatePercentageChange, fillMissingDays } from "@/lib/utils";
+import {
+  accounts,
+  categories,
+  customers,
+  insertCustomersSchema,
+  transactions,
+} from "@/db/schema";
+import {
+  calculatePercentageChange,
+  fillMissingDays,
+  lemonSqueezyApiInstance,
+} from "@/lib/utils";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
+import { createId } from "@paralleldrive/cuid2";
 import { differenceInDays, parse, subDays } from "date-fns";
 import { and, desc, eq, gte, lt, lte, sql, sum } from "drizzle-orm";
 import { Hono } from "hono";

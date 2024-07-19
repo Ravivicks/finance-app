@@ -1,0 +1,1 @@
+ALTER TABLE "customers" ALTER COLUMN "subscription_id" SET DATA TYPE text;

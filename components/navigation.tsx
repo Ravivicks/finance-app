@@ -24,6 +24,10 @@ const Navigation = () => {
       href: "/categories",
       label: "Categories",
     },
+    {
+      href: "/setting",
+      label: "Settings",
+    },
   ];
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();

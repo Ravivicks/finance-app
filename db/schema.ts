@@ -1,5 +1,12 @@
 import { relations } from "drizzle-orm";
-import { text, pgTable, integer, timestamp } from "drizzle-orm/pg-core";
+import {
+  text,
+  pgTable,
+  integer,
+  timestamp,
+  serial,
+  boolean,
+} from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -59,3 +66,30 @@ export const transactionRelations = relations(transactions, ({ one }) => ({
 export const insertTransactionSchema = createInsertSchema(transactions, {
   date: z.coerce.date(),
 });
+
+export const plans = pgTable("plan", {
+  id: serial("id").primaryKey(),
+  productId: integer("productId").notNull(),
+  productName: text("productName"),
+  variantId: integer("variantId").notNull().unique(),
+  name: text("name").notNull(),
+  description: text("description"),
+  price: text("price").notNull(),
+  isUsageBased: boolean("isUsageBased").default(false),
+  interval: text("interval"),
+  intervalCount: integer("intervalCount"),
+  trialInterval: text("trialInterval"),
+  trialIntervalCount: integer("trialIntervalCount"),
+  sort: integer("sort"),
+});
+
+export const insertPlansSchema = createInsertSchema(plans);
+
+export const customers = pgTable("customers", {
+  id: serial("id").primaryKey(),
+  email: text("email"),
+  status: text("status"),
+  subscription_id: text("subscription_id"),
+});
+
+export const insertCustomersSchema = createInsertSchema(customers);

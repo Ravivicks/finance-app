@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS "customers" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"store_id" integer,
+	"name" text,
+	"email" text,
+	"status" text,
+	"city" text,
+	"region" text,
+	"country" text,
+	"total_revenue_currency" integer,
+	"mrr" integer,
+	"status_formatted" text,
+	"country_formatted" text,
+	"total_revenue_currency_formatted" text,
+	"mrr_formatted" text,
+	"customer_portal" text,
+	"created_at" timestamp,
+	"updated_at" timestamp,
+	"test_mode" boolean DEFAULT true
+);
